@@ -5,5 +5,9 @@ type list interface {
 	Remove(value any)
 	RemoveByIndex(index int)
 	Foreach()
+}
+
+type debug interface {
 	checkType(value any)
+	throwPanic(panicStr string)
 }
