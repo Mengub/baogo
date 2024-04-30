@@ -19,20 +19,30 @@ type node struct {
 	value any
 }
 
-func (l LinkedList) checkType(value any) {
+func (l *LinkedList) checkType(value any) {
 	if l.length == 0 {
 		l.Type = reflect.TypeOf(value)
 	} else {
 		valueType := reflect.TypeOf(value)
 		if valueType != l.Type {
-			panic(fmt.Sprintf("%v IS NOT SUPPORT IN [%v]\n", valueType, l.Type))
+			panic(fmt.Sprintf("%v IS NOT SUPPORT IN LinkedList[]%v\n", valueType, l.Type))
 		}
 	}
 }
 
-func (l LinkedList) Append(value any) {
+func (l *LinkedList) Append(value any) {
 	l.checkType(value)
 	if l.length == 0 {
+		l.head = &node{
+			next:  nil,
+			prev:  nil,
+			value: nil,
+		}
+		l.tail = &node{
+			next:  nil,
+			prev:  nil,
+			value: nil,
+		}
 		l.head.next = &node{
 			next:  l.tail,
 			prev:  l.head,
@@ -58,19 +68,19 @@ func (l LinkedList) Append(value any) {
 	l.length++
 }
 
-func (l LinkedList) Remove(value any) {
+func (l *LinkedList) Remove(value any) {
 	l.checkType(value)
 
 }
 
-func (l LinkedList) RemoveByIndex(index int) {
+func (l *LinkedList) RemoveByIndex(index int) {
 
 }
 
-func (l LinkedList) Foreach() {
+func (l *LinkedList) Foreach() {
 	p := l.head
-	for p.next != nil {
-		fmt.Println(p.value)
+	for p.next != nil && p.next.value != nil {
 		p = p.next
+		fmt.Println(p.value)
 	}
 }
