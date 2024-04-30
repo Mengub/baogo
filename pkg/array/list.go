@@ -1,5 +1,9 @@
 package array
 
-type List interface {
-	Append(s int)
+type list interface {
+	Append(value any)
+	Remove(value any)
+	RemoveByIndex(index int)
+	Foreach()
+	checkType(value any)
 }
