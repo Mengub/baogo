@@ -74,8 +74,7 @@ func (l *LinkedList) Remove(value any) {
 	p := l.head
 	for p.next != nil && p.next.value != nil {
 		if p.value == value {
-			p.prev.next = p.next
-			p.next.prev = p.prev
+			removeNode(p)
 			return
 		}
 		p = p.next
@@ -94,4 +93,9 @@ func (l *LinkedList) Foreach() {
 		p = p.next
 		baoFmt.PrintLn(p.value)
 	}
+}
+
+func removeNode(n *node) {
+	n.prev.next = n.next
+	n.next.prev = n.prev
 }
